@@ -154,10 +154,10 @@ namespace Capstone
         {
             Console.WriteLine($"{park.Name} National Park Campgrounds");
 
-            Console.WriteLine(@"      Name                Open                Close               Daily Fee");
+            Console.WriteLine($@"{"".PadRight(6, ' ')}{"Name".PadRight(35, ' ')}{"Open".PadRight(20, ' ')}{"Close".PadRight(20, ' ')}{"Daily Fee"}");
             foreach (Campground campground in campgrounds)
             {
-                Console.WriteLine($@"#{campground.CampgroundId.ToString().PadRight(5, ' ')}{campground.Name.ToString().PadRight(20, ' ')}{campground.MonthNumberToName(campground.OpenFromMM).ToString().PadRight(20, ' ')}{campground.MonthNumberToName(campground.OpenToMM).ToString().PadRight(20, ' ')}{campground.DailyFee.ToString("C2")}");
+                Console.WriteLine($@"#{campground.CampgroundId.ToString().PadRight(5, ' ')}{campground.Name.ToString().PadRight(35, ' ')}{campground.MonthNumberToName(campground.OpenFromMM).ToString().PadRight(20, ' ')}{campground.MonthNumberToName(campground.OpenToMM).ToString().PadRight(20, ' ')}{campground.DailyFee.ToString("C2")}");
             }
         }
 

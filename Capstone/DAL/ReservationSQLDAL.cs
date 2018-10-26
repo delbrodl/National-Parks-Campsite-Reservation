@@ -52,32 +52,32 @@ namespace Capstone.DAL
             }
         }
 
-        public IList<Reservation> GetReservations(int siteId)
-        {
-            List<Reservation> output = new List<Reservation>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM reservation WHERE site_id = @siteid", conn);
-                    cmd.Parameters.AddWithValue("@siteid", siteId);
+        //public IList<Reservation> GetReservations(int siteId)
+        //{
+        //    List<Reservation> output = new List<Reservation>();
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(_connectionString))
+        //        {
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand("SELECT * FROM reservation WHERE site_id = @siteid", conn);
+        //            cmd.Parameters.AddWithValue("@siteid", siteId);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Reservation reservation = ConvertRowToReservation(reader);
-                        output.Add(reservation);
-                    }
-                }
-                return output;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("There was an error retrieving all available reservations.");
-                throw;
-            }
-        }
+        //            SqlDataReader reader = cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                Reservation reservation = ConvertRowToReservation(reader);
+        //                output.Add(reservation);
+        //            }
+        //        }
+        //        return output;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        Console.WriteLine("There was an error retrieving all available reservations.");
+        //        throw;
+        //    }
+        //}
 
         private static Reservation ConvertRowToReservation(SqlDataReader reader)
         {

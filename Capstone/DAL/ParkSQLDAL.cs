@@ -54,28 +54,28 @@ namespace Capstone.DAL
             };
         }
 
-        public Park GetParkInfo(int parkId)
-        {
-            Park park = new Park();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM park WHERE park_id = @parkid", conn);
-                    cmd.Parameters.AddWithValue("@parkid", parkId);
-                    SqlDataReader reader = cmd.ExecuteReader();
+        //public Park GetParkInfo(int parkId)
+        //{
+        //    Park park = new Park();
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(_connectionString))
+        //        {
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM park WHERE park_id = @parkid", conn);
+        //            cmd.Parameters.AddWithValue("@parkid", parkId);
+        //            SqlDataReader reader = cmd.ExecuteReader();
 
-                    reader.Read();
-                    park = ConvertRowToPark(reader);
-                }
-                return park;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("There was an error selecting Park information.");
-                throw;
-            }
-        }
+        //            reader.Read();
+        //            park = ConvertRowToPark(reader);
+        //        }
+        //        return park;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        Console.WriteLine("There was an error selecting Park information.");
+        //        throw;
+        //    }
+        //}
     }
 }
