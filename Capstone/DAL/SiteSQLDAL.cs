@@ -33,6 +33,7 @@ namespace Capstone.DAL
                     SqlCommand cmd = new SqlCommand(_query, conn);
                     cmd.Parameters.AddWithValue("@startdate", startDate);
                     cmd.Parameters.AddWithValue("@enddate", endDate);
+                    cmd.Parameters.AddWithValue("@campgroundid", campgroundId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
