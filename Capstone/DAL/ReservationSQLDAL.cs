@@ -8,11 +8,11 @@ namespace Capstone.DAL
 {
     public class ReservationSQLDAL : IReservationDAL
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
         public ReservationSQLDAL(string connectionString)
         {
-            _connectionString = connectionString;
+            this.connectionString = connectionString;
         }
 
         public int BookReservation(Reservation reservation)
@@ -21,7 +21,7 @@ namespace Capstone.DAL
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO reservation (site_id, name, from_date, to_date, create_date) VALUES (@siteid, @name, @fromdate, @todate, @createdate)", conn);
@@ -45,15 +45,15 @@ namespace Capstone.DAL
                     return confirmationId;
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine("Failed to add reservation to database.");
                 throw;
             }
         }
 
-        //public IList<Reservation> GetReservations(int siteId)
-        //{
+        // public IList<Reservation> GetReservations(int siteId)
+        // {
         //    List<Reservation> output = new List<Reservation>();
         //    try
         //    {
@@ -62,7 +62,6 @@ namespace Capstone.DAL
         //            conn.Open();
         //            SqlCommand cmd = new SqlCommand("SELECT * FROM reservation WHERE site_id = @siteid", conn);
         //            cmd.Parameters.AddWithValue("@siteid", siteId);
-
         //            SqlDataReader reader = cmd.ExecuteReader();
         //            while (reader.Read())
         //            {
@@ -77,7 +76,7 @@ namespace Capstone.DAL
         //        Console.WriteLine("There was an error retrieving all available reservations.");
         //        throw;
         //    }
-        //}
+        // }
 
         private static Reservation ConvertRowToReservation(SqlDataReader reader)
         {

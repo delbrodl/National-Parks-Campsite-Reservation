@@ -8,7 +8,7 @@ namespace Capstone
 {
     public class ViewParksMenuCLI
     {
-        const string DatabaseConnection = @"Data Source=.\sqlexpress;Initial Catalog=NPCampsite;Integrated Security=True";
+        private const string DatabaseConnection = @"Data Source=.\sqlexpress;Initial Catalog=NPCampsite;Integrated Security=True";
 
         public void DisplayAllParks()
         {
@@ -25,10 +25,11 @@ namespace Capstone
                 {
                     Console.WriteLine($"{i + 1}] >> {parks[i].Name} National Park");
                 }
+
                 Console.WriteLine("Q] >> Quit");
 
                 Console.Write("Enter selection: ");
-                string input = "";
+                string input = string.Empty;
                 input = CLIHelper.GetCleanSelectionInput(input);
 
                 for (int i = 0; i < parks.Count; i++)
@@ -40,8 +41,10 @@ namespace Capstone
                         reserveMenu.Display(parks[i]);
                      }
                 }
+
                 Console.Clear();
-                if(input == "Q")
+
+                if (input == "Q")
                 {
                     break;
                 }

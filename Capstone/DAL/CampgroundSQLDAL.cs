@@ -8,11 +8,11 @@ namespace Capstone.DAL
 {
     public class CampgroundSQLDAL : ICampgroundDAL
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
         public CampgroundSQLDAL(string connectionString)
         {
-            _connectionString = connectionString;
+            this.connectionString = connectionString;
         }
 
         public IList<Campground> GetAllCampgrounds(int parkId)
@@ -20,7 +20,7 @@ namespace Capstone.DAL
             List<Campground> output = new List<Campground>();
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT * FROM campground WHERE park_id = @parkid", conn);

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using Capstone.Models;
-using System.Data.SqlClient;
 
 namespace Capstone.DAL
 {
     public class ParkSQLDAL : IParkDAL
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
         public ParkSQLDAL(string connectionString)
         {
-            _connectionString = connectionString;
+            this.connectionString = connectionString;
         }
 
         public IList<Park> GetAllAvailableParks()
@@ -20,7 +20,7 @@ namespace Capstone.DAL
             List<Park> output = new List<Park>();
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("SELECT * FROM park", conn);
@@ -31,6 +31,7 @@ namespace Capstone.DAL
                         output.Add(park);
                     }
                 }
+
                 return output;
             }
             catch (SqlException ex)
@@ -54,8 +55,8 @@ namespace Capstone.DAL
             };
         }
 
-        //public Park GetParkInfo(int parkId)
-        //{
+        // public Park GetParkInfo(int parkId)
+        // {
         //    Park park = new Park();
         //    try
         //    {
@@ -65,7 +66,6 @@ namespace Capstone.DAL
         //            SqlCommand cmd = new SqlCommand("SELECT TOP 1 * FROM park WHERE park_id = @parkid", conn);
         //            cmd.Parameters.AddWithValue("@parkid", parkId);
         //            SqlDataReader reader = cmd.ExecuteReader();
-
         //            reader.Read();
         //            park = ConvertRowToPark(reader);
         //        }
@@ -76,6 +76,6 @@ namespace Capstone.DAL
         //        Console.WriteLine("There was an error selecting Park information.");
         //        throw;
         //    }
-        //}
+        // }
     }
 }

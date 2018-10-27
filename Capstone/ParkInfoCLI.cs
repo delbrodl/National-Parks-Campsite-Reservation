@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Capstone.Models;
 using Capstone.DAL;
+using Capstone.Models;
 
 namespace Capstone
 {
@@ -28,13 +28,13 @@ namespace Capstone
                 Console.WriteLine("Q] >> Return to Previous Screen");
                 Console.Write("Enter selection: ");
 
-                string input = "";
+                string input = string.Empty;
                 while (input.Length == 0)
                 {
                     input = Console.ReadLine();
                 }
-                input = input.Substring(0, 1).ToUpper();
 
+                input = input.Substring(0, 1).ToUpper();
 
                 if (input == "1")
                 {
@@ -44,9 +44,7 @@ namespace Capstone
                 }
                 else if (input == "2")
                 {
-                    //PurchaseMenuCLI submenu = new PurchaseMenuCLI(vm);
-                    //Console.WriteLine();
-                    //submenu.Display();
+                    // Console.Clear();
                 }
                 else if (input == "Q" || input == "q")
                 {

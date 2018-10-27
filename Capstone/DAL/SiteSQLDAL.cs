@@ -8,9 +8,9 @@ namespace Capstone.DAL
 {
     public class SiteSQLDAL : ISiteDAL
     {
-        private readonly string _connectionString;
+        private readonly string connectionString;
 
-        private readonly string _query = "SELECT TOP 5 * FROM site Left Join " +
+        private readonly string query = "SELECT TOP 5 * FROM site Left Join " +
             "(SELECT site_id FROM reservation WHERE (from_date BETWEEN @startdate AND @enddate) OR (to_date BETWEEN @startdate AND @enddate) OR (@startdate BETWEEN from_date AND to_date) OR (@enddate BETWEEN from_date AND to_date)) " +
             "AS filtered ON site.site_id = filtered.site_id " +
             "WHERE filtered.site_id IS NULL AND @campgroundid = site.campground_id ORDER BY site.site_number, site.max_occupancy";
@@ -18,7 +18,7 @@ namespace Capstone.DAL
 
         public SiteSQLDAL(string connectionString)
         {
-            _connectionString = connectionString;
+            this.connectionString = connectionString;
         }
 
         public IList<Site> GetAvailableSites(int campgroundId, DateTime startDate, DateTime endDate)
@@ -27,10 +27,10 @@ namespace Capstone.DAL
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(_query, conn);
+                    SqlCommand cmd = new SqlCommand(this.query, conn);
                     cmd.Parameters.AddWithValue("@startdate", startDate);
                     cmd.Parameters.AddWithValue("@enddate", endDate);
                     cmd.Parameters.AddWithValue("@campgroundid", campgroundId);
@@ -43,9 +43,10 @@ namespace Capstone.DAL
                         output.Add(site);
                     }
                 }
+
                 return output;
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine("There was an error retrieving available sites.");
                 throw;

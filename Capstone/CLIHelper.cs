@@ -9,31 +9,33 @@ namespace Capstone
     {
         public static string GetCleanSelectionInput(string input)
         {
-            input = "";
+            input = string.Empty;
 
             while (input.Length == 0)
             {
                 input = Console.ReadLine();
             }
+
             input = input.Substring(0, 1).ToUpper();
             return input;
         }
 
         public static string GetCleanNameInput(string input)
         {
-            input = "";
+            input = string.Empty;
 
             while (input.Length == 0)
             {
                 input = Console.ReadLine();
             }
+
             return input;
         }
 
         public static string GetCleanSelectionInput(string input, string escapeSq)
         {
             int intResult;
-            input = "";
+            input = string.Empty;
 
             while (input.Length == 0 || ((!int.TryParse(input, out intResult)) && input != escapeSq))
             {
@@ -43,20 +45,29 @@ namespace Capstone
                     input.Substring(0, 1).ToUpper();
                 }
             }
+
             return input;
         }
 
         public static void WordWrap(string paragraph)
         {
             paragraph = new Regex(@" {2,}").Replace(paragraph.Trim(), @" ");
-            var left = Console.CursorLeft; var top = Console.CursorTop; var lines = new List<string>();
+            var left = Console.CursorLeft;
+            var top = Console.CursorTop;
+            var lines = new List<string>();
+
             for (var i = 0; paragraph.Length > 0; i++)
             {
                 lines.Add(paragraph.Substring(0, Math.Min(Console.WindowWidth, paragraph.Length)));
                 var length = lines[i].LastIndexOf(" ", StringComparison.Ordinal);
-                if (length > 0) lines[i] = lines[i].Remove(length);
+                if (length > 0)
+                {
+                    lines[i] = lines[i].Remove(length);
+                }
+
                 paragraph = paragraph.Substring(Math.Min(lines[i].Length + 1, paragraph.Length));
-                Console.SetCursorPosition(left, top + i); Console.WriteLine(lines[i]);
+                Console.SetCursorPosition(left, top + i);
+                Console.WriteLine(lines[i]);
             }
         }
 
@@ -73,12 +84,14 @@ namespace Capstone
 
             do
             {
-                input = "";
+                input = string.Empty;
                 while (input.Length == 0)
                 {
                     input = Console.ReadLine();
                 }
-            } while (!DateTime.TryParse(input, out dateValue));
+            }
+            while (!DateTime.TryParse(input, out dateValue));
+
             return input;
         }
     }
